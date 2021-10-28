@@ -52,13 +52,13 @@ model.compile(loss='binary_crossentropy',
              metrics=['accuracy'])
 
 model_fit = model.fit(train_dataset,
-                    steps_per_epoch=3,
-                    epochs=20,
+                    steps_per_epoch=6,
+                    epochs=11,
                     validation_data=validation_dataset)
 
 #print(model_fit)
 #print(model.summary())
-model.save("shirtDetector.h5py")
+model.save("layDownDetector.h5py")
 dir_path = 'testing/'
 for i in os.listdir(dir_path):
     img = image.load_img(dir_path+'//'+i, target_size=(200,200))
@@ -68,7 +68,8 @@ for i in os.listdir(dir_path):
     images = np.vstack([X])
     val = model.predict(images)
     if val == 0:
-        print("bottoms")
+        print("not laying down")
     else:
-        print("tops")
+        print("laying down")
     plt.show()
+
